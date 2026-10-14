@@ -1,6 +1,6 @@
 # CV — Domain Context
 
-A single-page personal CV, rendered from one data file. Visual design follows merycodes.com — classes and theme tokens copied from its compiled Tailwind CSS (system font stack, `text-sm` = 15px, zinc hex colors).
+A single-page personal CV, rendered from one data file. Visual design follows merycodes.com — classes and theme tokens copied from its compiled Tailwind CSS (system font stack, zinc hex colors). Type scale is ours: headings 18px, body 15px, small 14px.
 
 The exact data shape lives in `src/cv/types.ts`; this file defines the terms.
 
@@ -26,6 +26,6 @@ The exact data shape lives in `src/cv/types.ts`; this file defines the terms.
 
 ## Modules
 
-**`renderCv(cv)`** (`src/cv/render.ts`): the one interface the page uses. CV data in, HTML string out. Pure, escapes all text, omits empty sections. Tests go through this.
+**`<App cv={cv} />`** (`src/App.tsx`): the one interface the page uses. CV data in, page out. Pure (renders only from `cv`), omits empty sections. Tests go through this.
 
-Experience and Education both render through the internal `timeline` section. Sections (`src/cv/sections/*`) and `html` (`src/cv/html.ts`) are internal to `renderCv` — not called from elsewhere.
+Components in `src/components/` are internal to `App`. Experience and Education both render through `Timeline`, which always shows entries newest first (by `start`, then `end`; ongoing first) — the order in `data.ts` does not matter.

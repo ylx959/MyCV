@@ -5,7 +5,7 @@ import { Timeline } from './components/Timeline.tsx'
 import type { Cv } from './cv/types.ts'
 
 /** The whole CV page. Pure: renders only from `cv`; empty sections are omitted. */
-export function App({ cv }: { cv: Cv }) {
+export  default function App({ cv }: { cv: Cv }) {
   return (
     <div className="mx-auto flex max-w-2xl justify-center p-8 md:py-16">
       <div className="w-full">

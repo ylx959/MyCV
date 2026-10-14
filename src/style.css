@@ -13,7 +13,11 @@
 
   --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --text-sm: 0.9375rem;
+  /* Type scale: headings (text-lg, 18px) stay; everything else is 1px smaller
+     than merycodes.com (body 16 → 15px, text-sm 15 → 14px) for more heading contrast. */
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.5;
+  --text-sm: 0.875rem;
   --text-sm--line-height: calc(1.25 / 0.875);
 }
 

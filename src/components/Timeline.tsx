@@ -17,16 +17,25 @@ function Period({ start, end }: PeriodData) {
   )
 }
 
-/** A titled list of dated entries (Experience, Education). Omitted when empty. */
+/** Ongoing (`end: null`) counts as latest; a single-year entry ends when it starts. */
+const endOf = ({ start, end }: PeriodData) => (end === null ? '￿' : (end ?? start))
+
+/** Newest first: by `start` descending, then by end descending. Dates are `YYYY` or `YYYY-MM`, so string order is date order. */
+const newestFirst = (a: PeriodData, b: PeriodData) =>
+  b.start.localeCompare(a.start) || endOf(b).localeCompare(endOf(a))
+
+/** A titled list of dated entries (Experience, Education), newest first. Omitted when empty. */
 export function Timeline({ heading, entries = [] }: { heading: string; entries?: Entry[] }) {
   if (entries.length === 0) return null
+
+  const sorted = [...entries].sort(newestFirst)
 
   return (
     <section>
       <h2 className="mb-6 text-lg font-semibold">{heading}</h2>
       <ul>
-        {entries.map((item, i) => (
-          <li key={item.title + item.start} className={`mb-10 pb-10 ${i < entries.length - 1 ? 'border-b border-black/10' : ''}`}>
+        {sorted.map((item, i) => (
+          <li key={item.title + item.start} className={`mb-10 pb-10 ${i < sorted.length - 1 ? 'border-b border-black/10' : ''}`}>
             <article>
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold">{item.title}</h3>

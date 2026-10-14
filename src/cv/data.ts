@@ -3,8 +3,8 @@ import type { Cv } from './types.ts'
 /** CV content — the only file you need to edit to change what the page says. */
 export const cv: Cv = {
   profile: {
-    name: 'Your Name',
-    title: 'Frontend Engineer',
+    name: 'Raymond Yang',
+    title: 'Software Engineer',
     nav: [
       { label: 'My work', href: 'https://github.com/your-handle' },
       { label: 'Notes', href: '#', icon: 'note' },
@@ -34,8 +34,8 @@ export const cv: Cv = {
     {
       school: 'The University of Sydney',
       degree: 'Master of Computer Science',
-      start: 'YYYY',
-      end: 'YYYY',
+      start: '2027',
+      end: '2029',
     },
     {
       school: 'National Taiwan University of Science and Technology',

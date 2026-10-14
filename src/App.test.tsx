@@ -1,8 +1,12 @@
+import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { cv } from './data.ts'
-import { renderCv } from './render.ts'
+import { App } from './App.tsx'
+import { cv } from './cv/data.ts'
+import type { Cv } from './cv/types.ts'
 
-describe('renderCv', () => {
+const renderCv = (data: Cv) => renderToStaticMarkup(<App cv={data} />)
+
+describe('App', () => {
   it('renders the profile name and title', () => {
     const out = renderCv(cv)
     expect(out).toContain(cv.profile.name)
@@ -24,6 +28,7 @@ describe('renderCv', () => {
   it('shows Present for an ongoing role and a single year when there is no end', () => {
     const out = renderCv({
       ...cv,
+      education: [],
       experience: [
         { company: 'A', start: '2025', end: null },
         { company: 'B', start: '2022' },
@@ -48,7 +53,7 @@ describe('renderCv', () => {
   })
 })
 
-describe('renderCv edge cases', () => {
+describe('App edge cases', () => {
   it('renders nothing for an empty highlights list', () => {
     const out = renderCv({ ...cv, education: [], experience: [{ company: 'A', start: '2024', highlights: [] }] })
     expect(out).not.toContain('list-disc')
@@ -69,5 +74,48 @@ describe('education', () => {
 
   it('is omitted when there is no education', () => {
     expect(renderCv({ ...cv, education: [] })).not.toContain('Education')
+  })
+})
+
+describe('timeline order', () => {
+  const titles = (out: string) => [...out.matchAll(/<h3[^>]*>([^<]+)<\/h3>/g)].map((m) => m[1])
+
+  it('sorts entries newest first by start, regardless of data order', () => {
+    const out = renderCv({
+      ...cv,
+      experience: [],
+      education: [
+        { school: 'High School', start: '2019', end: '2022' },
+        { school: 'Master', start: '2027', end: '2028' },
+        { school: 'Bachelor', start: '2022', end: '2026' },
+      ],
+    })
+    expect(titles(out)).toEqual(['Master', 'Bachelor', 'High School'])
+  })
+
+  it('breaks start ties by end, with ongoing entries first', () => {
+    const out = renderCv({
+      ...cv,
+      education: [],
+      experience: [
+        { company: 'Ended', start: '2024', end: '2025' },
+        { company: 'Ongoing', start: '2024', end: null },
+        { company: 'Single year', start: '2024' },
+      ],
+    })
+    expect(titles(out)).toEqual(['Ongoing', 'Ended', 'Single year'])
+  })
+
+  it('draws dividers between entries but not after the last one in sorted order', () => {
+    const out = renderCv({
+      ...cv,
+      education: [],
+      experience: [
+        { company: 'Old', start: '2020' },
+        { company: 'New', start: '2024' },
+      ],
+    })
+    expect(out).toMatch(/border-b[^>]*>(?:(?!<li).)*New/)
+    expect(out).not.toMatch(/border-b[^>]*>(?:(?!<li).)*Old/)
   })
 })
