@@ -34,7 +34,7 @@ function Chip(person: Person) {
   const Tag = person.href ? 'a' : 'span'
   return (
     <Tag
-      className="flex items-center gap-2 rounded-full bg-black/6 py-1 pr-3 pl-1 transition-all duration-100 hover:bg-black/10"
+      className="flex items-center gap-2 rounded-full bg-ink/6 py-1 pr-3 pl-1 transition-all duration-100 hover:bg-ink/10 dark:bg-zinc-300 dark:text-zinc-900 dark:hover:bg-zinc-200"
       {...(person.href && linkProps(person.href))}
     >
       <Avatar {...person} />

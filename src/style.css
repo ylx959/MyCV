@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Copied from merycodes.com's compiled theme */
 @theme {
   --color-lightest: #fcfcfc;
@@ -10,6 +12,8 @@
   --color-primary: var(--color-zinc-900);
   --color-secondary: var(--color-zinc-600);
   --color-tertiary: var(--color-zinc-500);
+  /* Ink for translucent strokes, fills and underlines; flips with the theme. */
+  --color-ink: #000;
 
   --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
@@ -25,11 +29,21 @@
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 2px;
-  text-decoration-color: --alpha(var(--color-black) / 20%);
+  text-decoration-color: --alpha(var(--color-ink) / 20%);
   transition-property: color, text-decoration-color;
   transition-duration: 100ms;
 
   &:hover {
-    text-decoration-color: var(--color-black);
+    text-decoration-color: var(--color-ink);
   }
+}
+
+/* Dark mode: <html class="dark">, toggled by the dot beside the name. */
+.dark {
+  --color-lightest: #09090b;
+  --color-primary: #fcfcfc;
+  --color-secondary: #d4d4d8;
+  --color-tertiary: var(--color-zinc-400);
+  --color-ink: #fff;
+  color-scheme: dark;
 }

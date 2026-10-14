@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>My CV</title>
+    <script>
+      try {
+        const saved = localStorage.getItem('theme')
+        if (saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches)
+          document.documentElement.classList.add('dark')
+      } catch {}
+    </script>
   </head>
-  <body class="text-body antialiased h-[100dvh] overscroll-none overflow-x-auto bg-lightest text-primary text-pretty">
+  <body class="text-body antialiased h-[100dvh] overscroll-none overflow-x-auto bg-lightest text-primary text-pretty transition-colors duration-200">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

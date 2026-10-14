@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { App } from './App.tsx'
+import App from './App.tsx'
 import { cv } from './cv/data.ts'
 import type { Cv } from './cv/types.ts'
 
@@ -11,6 +11,11 @@ describe('App', () => {
     const out = renderCv(cv)
     expect(out).toContain(cv.profile.name)
     expect(out).toContain(cv.profile.title)
+  })
+
+  it('shows the theme dot only when a toggle handler is given', () => {
+    expect(renderCv(cv)).not.toContain('Toggle dark mode')
+    expect(renderToStaticMarkup(<App cv={cv} onToggleTheme={() => {}} />)).toContain('aria-label="Toggle dark mode"')
   })
 
   it('escapes user-provided text', () => {

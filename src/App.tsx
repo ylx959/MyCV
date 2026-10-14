@@ -4,12 +4,15 @@ import { Profile } from './components/Profile.tsx'
 import { Timeline } from './components/Timeline.tsx'
 import type { Cv } from './cv/types.ts'
 
-/** The whole CV page. Pure: renders only from `cv`; empty sections are omitted. */
-export  default function App({ cv }: { cv: Cv }) {
+/**
+ * The whole CV page. Pure: renders only from `cv`; empty sections are omitted.
+ * `onToggleTheme`, when given, shows the light/dark dot beside the name.
+ */
+export  default function App({ cv, onToggleTheme }: { cv: Cv; onToggleTheme?: () => void }) {
   return (
     <div className="mx-auto flex max-w-2xl justify-center p-8 md:py-16">
       <div className="w-full">
-        <Profile {...cv.profile} />
+        <Profile {...cv.profile} onToggleTheme={onToggleTheme} />
         <main className="mt-16">
           <Timeline heading="Experience" entries={cv.experience?.map((job) => ({ ...job, title: job.company }))} />
           <Timeline

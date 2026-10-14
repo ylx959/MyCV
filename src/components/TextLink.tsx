@@ -43,7 +43,7 @@ export function TextLink({ label, href, icon = 'arrow' }: Link) {
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
-        className="text-black/30 group-hover:text-black/80"
+        className="text-ink/30 group-hover:text-ink/80"
       >
         {icons[icon]}
       </svg>

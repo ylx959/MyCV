@@ -35,7 +35,7 @@ export function Timeline({ heading, entries = [] }: { heading: string; entries?:
       <h2 className="mb-6 text-lg font-semibold">{heading}</h2>
       <ul>
         {sorted.map((item, i) => (
-          <li key={item.title + item.start} className={`mb-10 pb-10 ${i < sorted.length - 1 ? 'border-b border-black/10' : ''}`}>
+          <li key={item.title + item.start} className={`mb-10 pb-10 ${i < sorted.length - 1 ? 'border-b border-ink/10' : ''}`}>
             <article>
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold">{item.title}</h3>
