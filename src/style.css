@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Copied from merycodes.com's compiled theme */
+@theme {
+  --color-lightest: #fcfcfc;
+  --color-zinc-400: #9f9fa9;
+  --color-zinc-500: #71717b;
+  --color-zinc-600: #52525c;
+  --color-zinc-900: #18181b;
+  --color-primary: var(--color-zinc-900);
+  --color-secondary: var(--color-zinc-600);
+  --color-tertiary: var(--color-zinc-500);
+
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: calc(1.25 / 0.875);
+}
+
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: --alpha(var(--color-black) / 20%);
+  transition-property: color, text-decoration-color;
+  transition-duration: 100ms;
+
+  &:hover {
+    text-decoration-color: var(--color-black);
+  }
+}
