@@ -21,7 +21,7 @@ export function ThemeToggle({ onToggle }: { onToggle: () => void }) {
       <svg
         viewBox="0 0 121 92"
         aria-hidden="true"
-        className="block h-3.5 w-auto transition-[scale] duration-200 ease-out scale-80 group-hover:scale-60"
+        className="block h-3.5 w-auto transition-[scale] duration-200 ease-out scale-85 group-hover:scale-75"
       >
         <rect width="121" height="92" className="fill-ink" />
         <path d="M61.5 56L6.50739 5.75L116.493 5.74999L61.5 56Z" className="fill-lightest" />
