@@ -60,7 +60,7 @@ describe('App', () => {
 
 describe('App edge cases', () => {
   it('renders nothing for an empty highlights list', () => {
-    const out = renderCv({ ...cv, education: [], experience: [{ company: 'A', start: '2024', highlights: [] }] })
+    const out = renderCv({ ...cv, education: [], projects: [], experience: [{ company: 'A', start: '2024', highlights: [] }] })
     expect(out).not.toContain('list-disc')
     expect(out).not.toMatch(/>\s*0\s*</)
   })
@@ -122,5 +122,31 @@ describe('timeline order', () => {
     })
     expect(out).toMatch(/border-b[^>]*>(?:(?!<li).)*New/)
     expect(out).not.toMatch(/border-b[^>]*>(?:(?!<li).)*Old/)
+  })
+})
+
+describe('projects', () => {
+  it('renders between experience and education, with the name linked when href is given', () => {
+    const out = renderCv({ ...cv, projects: [{ name: 'Tiny App', href: 'https://tiny.dev', start: '2025' }] })
+    expect(out.indexOf('Projects')).toBeGreaterThan(out.indexOf('Experience'))
+    expect(out.indexOf('Projects')).toBeLessThan(out.indexOf('Education'))
+    expect(out).toMatch(/<h3[^>]*><a[^>]*href="https:\/\/tiny\.dev"[^>]*>Tiny App<svg/)
+  })
+
+  it('is omitted when there are no projects', () => {
+    expect(renderCv({ ...cv, projects: [] })).not.toContain('Projects')
+  })
+})
+
+describe('skills', () => {
+  it('renders each group label with its items, after education', () => {
+    const out = renderCv({ ...cv, skills: [{ label: 'Languages', items: ['TypeScript', 'Go'] }] })
+    expect(out.indexOf('Skills')).toBeGreaterThan(out.indexOf('Education'))
+    expect(out).toMatch(/<dt[^>]*>Languages<\/dt>/)
+    expect(out).toMatch(/>TypeScript<.*>Go</)
+  })
+
+  it('is omitted when every group is empty', () => {
+    expect(renderCv({ ...cv, skills: [{ label: 'Languages', items: [] }] })).not.toContain('Skills')
   })
 })

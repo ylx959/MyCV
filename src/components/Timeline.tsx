@@ -1,9 +1,11 @@
 import type { Period as PeriodData, RichText as RichTextValue } from '../cv/types.ts'
-import { RichText } from './TextLink.tsx'
+import { RichText, TextLink } from './TextLink.tsx'
 
 /** One row of a timeline section: a heading, its period, and optional detail. */
 export type Entry = PeriodData & {
   title: string
+  /** Makes the title a link. */
+  href?: string
   summary?: RichTextValue
   highlights?: RichTextValue[]
 }
@@ -24,7 +26,7 @@ const endOf = ({ start, end }: PeriodData) => (end === null ? '￿' : (end ?? st
 const newestFirst = (a: PeriodData, b: PeriodData) =>
   b.start.localeCompare(a.start) || endOf(b).localeCompare(endOf(a))
 
-/** A titled list of dated entries (Experience, Education), newest first. Omitted when empty. */
+/** A titled list of dated entries (Experience, Projects, Education), newest first. Omitted when empty. */
 export function Timeline({ heading, entries = [] }: { heading: string; entries?: Entry[] }) {
   if (entries.length === 0) return null
 
@@ -38,7 +40,9 @@ export function Timeline({ heading, entries = [] }: { heading: string; entries?:
           <li key={item.title + item.start} className={`mb-10 pb-10 ${i < sorted.length - 1 ? 'border-b border-ink/10' : ''}`}>
             <article>
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold">{item.title}</h3>
+                <h3 className="font-semibold">
+                  {item.href ? <TextLink label={item.title} href={item.href} /> : item.title}
+                </h3>
                 <Period {...item} />
               </div>
               {item.summary && (

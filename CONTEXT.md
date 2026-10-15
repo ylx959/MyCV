@@ -18,7 +18,11 @@ The exact data shape lives in `src/cv/types.ts`; this file defines the terms.
 
 **Experience**: a job held, with a **Period**.
 
+**Project**: something built, with a **Period** and an optional link on its name. Rendered right after Experience in the same layout.
+
 **Education**: a school attended, with a **Period**. Rendered right after Experience in the same layout (school as heading, degree as the line below).
+
+**Skills**: labelled groups of skills (e.g. Languages, Frontend), each shown as a row of chips. Rendered after Education.
 
 **Collaborations**: people worked with. A **Person** without an avatar shows initials.
 
@@ -28,4 +32,4 @@ The exact data shape lives in `src/cv/types.ts`; this file defines the terms.
 
 **`<App cv={cv} />`** (`src/App.tsx`): the one interface the page uses. CV data in, page out. Pure (renders only from `cv`), omits empty sections. Tests go through this.
 
-Components in `src/components/` are internal to `App`. Experience and Education both render through `Timeline`, which always shows entries newest first (by `start`, then `end`; ongoing first) — the order in `data.ts` does not matter.
+Components in `src/components/` are internal to `App`. Experience, Projects and Education all render through `Timeline`, which always shows entries newest first (by `start`, then `end`; ongoing first) — the order in `data.ts` does not matter.

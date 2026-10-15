@@ -38,6 +38,20 @@ export type Education = Period & {
   highlights?: RichText[]
 }
 
+export type Project = Period & {
+  name: string
+  /** Live site or repo. Makes the name a link. */
+  href?: string
+  summary?: RichText
+  highlights?: RichText[]
+}
+
+/** A labelled row of skills, e.g. `Languages: TypeScript, Python`. */
+export type SkillGroup = {
+  label: string
+  items: string[]
+}
+
 export type Person = {
   name: string
   href?: string
@@ -53,7 +67,9 @@ export type Collaborations = {
 export type Cv = {
   profile: Profile
   experience?: Experience[]
+  projects?: Project[]
   education?: Education[]
+  skills?: SkillGroup[]
   collaborations?: Collaborations
   connect?: Link[]
 }

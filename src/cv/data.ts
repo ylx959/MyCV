@@ -4,7 +4,7 @@ import type { Cv } from './types.ts'
 export const cv: Cv = {
   profile: {
     name: 'Raymond Yang',
-    title: 'Software Engineer',
+    title: 'Developer',
     nav: [
       { label: 'My work', href: 'https://github.com/your-handle' },
       { label: 'Notes', href: '#', icon: 'note' },
@@ -30,6 +30,15 @@ export const cv: Cv = {
       summary: 'First frontend hire, focused on the marketing site and design system.',
     },
   ],
+  projects: [
+    {
+      name: 'Project Name',
+      href: 'https://github.com/ylx959',
+      start: '2025',
+      summary: 'One sentence on what it does and why you built it.',
+      highlights: ['What you built or learned', 'A number that shows impact'],
+    },
+  ],
   education: [
     {
       school: 'The University of Sydney',
@@ -48,6 +57,25 @@ export const cv: Cv = {
       start: '2019',
       end: '2022',
     },
+  ],
+  skills: [
+    { label: 'Languages', items: ['TypeScript', 'JavaScript', 'Python','C/C++'] },
+    { label: 'Frontend', items: ['HTML', 'CSS', 'Tailwind CSS', 'JavaScript', 'React', 'GSAP', 'ScrollTrigger', 'Motion', 'WebGL', 'Lenis'] },
+    { label: 'Backend', items: ['FastAPI', 'RESTful API', 'MySQL'] },
+    { label: 'AI', items: ['Machine Learning', 'PyTorch', 'AI Agents', 'AI Engineering', 'Prompt Engineering', 'Claude Code'] },
+    { label: 'Tools', items: ['Git/GitHub', 'Docker', 'Vite', 'Vercel', 'Figma', 'Adobe Illustrator', 'Adobe Photoshop'] },
+    {
+      label: 'Design',
+      items: [
+        'Product Design',
+        'UI/UX Design',
+        'Interaction Design',
+        'Motion Design',
+        'Visual Design',
+        'Design Systems',
+      ],
+    },
+    { label: 'Fundamentals', items: ['Data Structures', 'Algorithms', 'Operating Systems', 'Computer Networks', 'Database Systems', 'OOP'] },
   ],
   collaborations: {
     intro: 'Some of the people I had the chance to work alongside and learn from',

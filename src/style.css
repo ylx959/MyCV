@@ -47,3 +47,9 @@
   --color-ink: #fff;
   color-scheme: dark;
 }
+
+
+::selection{
+  color:white;
+  background-color: #FF4A00;
+}
