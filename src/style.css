@@ -50,6 +50,8 @@
 
 
 ::selection{
-  color:white;
-  background-color: #FF4A00;
+    color: #ff4a00;
+    text-decoration: underline wavy #ff4a00;
+    text-decoration-thickness: 0.8px;
+    text-underline-offset: 0.2em;
 }
